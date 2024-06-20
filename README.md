@@ -17,57 +17,82 @@ Take the following HTML and update all functions to arrow functions.
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Arrow Functions</title>
-</head>
-<body id="body">
+  </head>
+  <body id="body">
     <h1>My Boring Website</h1>
     <p id="paragraph">
-        This website is boring, with very little CSS. 
-        However, we really just care about the javascript. 
-        For example, if you click <button id="button">this button</button>, the background of this paragraph tag will change to blue.
+      This website is boring, with very little CSS. However, we really just care
+      about the javascript. For example, if you click
+      <button id="color-button">this button</button>, the background of this
+      paragraph tag will change to blue.
     </p>
     <p>
-      We also have a <button id="alert">alert</button> button that will grab the text from the input below and show it in a popup.
+      We also have a <button id="alert-button">alert</button> button that will
+      grab the text from the input below and show it in a popup.
     </p>
-    <input type="text" name="" id="popup-input" />
+    <input type="text" name="popup-input" id="popup-input" />
     <p>
-        We just like random interactivity in the site, including a fun effect if you hover over <span id="hover-this"><b>this.</b></span>
+      We just like random interactivity in the site, including a fun effect if
+      you hover over <span id="hover-span"><b>this.</b></span>
     </p>
-    <p id="set-color">
-        We can click anywhere in this paragraph tag and it will change the background color to whatever is in this input: <input type="text" id="color-input"/>
+    <p
+      id="set-color"
+      onclick="setBackgroundColorById('set-color', getValueFromId('color-input'))">
+      We can click anywhere in this paragraph tag and it will change the
+      background color to whatever is in this input:
+      <input type="text" name="color-input" id="color-input" />
     </p>
-    <p onmouseover="mouseOverFunction(this)">
-        Moving your mouse over this text will make it black, so you cannot read it!
+    <p onmouseover="backgroundToBlack(this)">
+      Moving your mouse over this text will make it black, so you cannot read
+      it!
     </p>
     <script>
-        document.getElementById("button").onclick = function() {
-            setBackgroundColorById("paragraph", "blue");
+      const colorButton = document.querySelector('#color-button');
+      const alertButton = document.querySelector('#alert-button');
+      const popupInput = document.querySelector('#popup-input');
+      const hoverSpan = document.querySelector('#hover-span');
+
+      colorButton.onclick = function () {
+        setBackgroundColorById('paragraph', 'blue');
+      };
+
+      alertButton.onclick = function () {
+        if (popupInput.value.trim().length !== 0) {
+          alert(popupInput.value);
+        } else {
+          alert('You forgot to enter some text into the pop-up input!');
         }
-        document.getElementById("alert").onclick = function(){
-            alert(document.getElementById("popup-input").value);
-        }
-        document.getElementById("hover-this").onmouseover = function(){
-            setBackgroundColorById("body", "red");
-        }
-        document.getElementById("hover-this").onmouseout = function(){
-            setBackgroundColorById("body", "white");
-        }
-        function getValueFromId(id){
-            return document.getElementById(id).value;
-        }
-        function setBackgroundColorById(id, color){
-            document.getElementById(id).style = "background-color: " + color;
-        }
-        function mouseOverFunction(el){
-            el.style = "background-color: black";
-        }
+      };
+
+      hoverSpan.onmouseover = function () {
+        setBackgroundColorById('body', 'red');
+      };
+
+      hoverSpan.onmouseout = function () {
+        setBackgroundColorById('body', 'white');
+      };
+
+      function getValueFromId(id) {
+        return document.getElementById(id).value;
+      }
+
+      function setBackgroundColorById(id, color) {
+        const element = document.getElementById(id);
+        element.style.backgroundColor = color;
+      }
+
+      function backgroundToBlack(el) {
+        el.style.backgroundColor = 'black';
+      }
     </script>
-</body>
+  </body>
 </html>
+
 ```
 
 - Update all functions to utilize arrow function syntax
